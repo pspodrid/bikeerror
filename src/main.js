@@ -16,12 +16,15 @@ $(document).ready(function() {
     (async () => {
       let bikeService = new BikeService();
       const response = await bikeService.apiCall(city,color,manufacturer);
-      getElements(response);
+      // if (typeof response !== "string") {
+        getElements(response);
+      // } else {
     })();
 
    function getElements(response) {
       $('.showNumber').text(`The number of stolen bikes that match your search is ${response.proximity}`);
       $('.showTotal').text(`The total number of nonstolen bikes in your area is ${response.non}`);
-    }
+      $('.showErrors').text(`I'm sorry, Dave, I don't think I can do that because:  ${response.error}`);
+    };
   });
 });
